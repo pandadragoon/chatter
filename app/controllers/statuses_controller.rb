@@ -1,12 +1,14 @@
 class StatusesController < ApplicationController
 
+  before_action :require_user, only: [:new, :create]
+
   def new
     @status = Status.new
   end
 
   def create
     @status = Status.new(status_params)
-    user = User.find 1
+    user = User.find(current_user)
     @status.creator = user
 
     if @status.save

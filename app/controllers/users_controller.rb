@@ -4,6 +4,9 @@ class UsersController < ApplicationController
     @user = User.find_by username: params[:username]
   end
 
+  def index
+    @users = User.all
+  end
   def new
     @user = User.new
   end
@@ -15,7 +18,7 @@ class UsersController < ApplicationController
       flash[:notice] = "You have registered!"
       redirect_to user_path(@user.username)
     else
-      flash[:error] = "You were unable to register."
+      flash.now[:error] = "You were unable to register."
       render :new
     end
   end
