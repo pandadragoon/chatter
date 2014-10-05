@@ -4,9 +4,15 @@ Chatter::Application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
+  get '/timeline', to: 'users#timeline'
 
   resources :statuses, only: [:new, :create]
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create] do
+    member do
+      post 'follow'
+      post 'unfollow'
+    end
+  end
 
   get '/:username', to: 'users#show', as: 'user'
 end
