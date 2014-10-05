@@ -1,5 +1,5 @@
 class UsersController < ApplicationController 
-  before_action :require_user, only: [:follow, :unfollow, :timeline]
+  before_action :require_user, only: [:follow, :unfollow, :timeline, :mentions]
 
   def show
     @user = User.find_by username: params[:username]
@@ -53,6 +53,10 @@ class UsersController < ApplicationController
       @statuses << user.statuses.all
     end
     @statuses.flatten!
+  end
+
+  def mentions
+
   end
 
   private

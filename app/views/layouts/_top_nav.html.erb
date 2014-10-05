@@ -2,7 +2,8 @@
 <% if logged_in? %>
   <%= link_to 'New Status', new_status_path %> |
   <%= link_to 'Timeline', timeline_path %> |
-  Hi <%= current_user.username %> |
+  <%= link_to 'Mentions', mentions_path %> |
+  User: <%= link_to current_user.username, user_path(current_user.username) %> |
   <%= link_to 'Log Out', logout_path %>
 <% else %>
   <%= link_to 'Register', new_user_path %> |
