@@ -1,5 +1,5 @@
 Chatter::Application.routes.draw do
-  root to: 'users#index'
+  root to: 'index#index'
   
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
@@ -13,7 +13,7 @@ Chatter::Application.routes.draw do
       post 'share'
     end
   end
-  resources :users, only: [:new, :create] do
+  resources :users, only: [:new, :create, :index] do
     member do
       post 'follow'
       post 'unfollow'
