@@ -1,13 +1,13 @@
-<%= auto_links(status.body) %> 
+<p class="status_body"><%= auto_links(status.body) %></p>
 <% if !status.share_id || status.creator.username == status.parent_status.creator.username %>
-  created by 
+  <p>created by
 <% else %>
-  (<%= link_to "#{status.parent_status.creator.username}", user_path(status.parent_status.creator.username) %>)
-  <%= link_to "status", status_path(status.parent_status) %>
-  shared by
+  <%= link_to "@#{status.parent_status.creator.username}'s:", user_path(status.parent_status.creator.username) %>
+  <%= link_to "status", status_path(status.parent_status), class: "text-muted" %>
+  <p>shared by 
 <% end %>
-<%= link_to status.creator.username, user_path(status.creator.username) %> 
-<em><%= time_since_creation(status.created_at) %></em>
-<% if logged_in? && status.creator != current_user%>
-  [<%= link_to 'share status', share_status_path(status), method: 'post' %>]
+<%= link_to status.creator.username, user_path(status.creator.username) %>
+<em><%= time_since_creation(status.created_at) %></em></p>
+<% if logged_in? && status.creator != current_user %>
+  <p><%= link_to 'share status', share_status_path(status), method: 'post', class: "btn btn-success btn-sm" %></p>
 <% end %>

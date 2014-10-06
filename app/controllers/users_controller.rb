@@ -1,5 +1,5 @@
 class UsersController < ApplicationController 
-  before_action :require_user, only: [:follow, :unfollow, :timeline, :mentions]
+  before_action :require_user, only: [:follow, :unfollow, :timeline, :mentions, :index]
 
   def show
     @user = User.find_by username: params[:username]
@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.all.sort_by{|user| user.username}
   end
 
   def new
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:notice] = "You have registered!"
-      redirect_to user_path(@user.username)
+      redirect_to login_path
     else
       flash.now[:error] = "You were unable to register."
       render :new

@@ -19,6 +19,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_splash
+    if logged_in?
+      redirect_to timeline_path
+    end
+  end
+
   def wrong_path
     flash[:error] = "There was an error."
     redirect_to root_path

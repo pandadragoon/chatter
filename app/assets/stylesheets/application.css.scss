@@ -14,3 +14,16 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.status_body {
+  font-size: 1.3em;
+}
+
+span.label a {
+  color: white;
+  font-size: .75em;
+}
+
+ul.list-unstyled li a {
+  font-size: 2em;
+}
