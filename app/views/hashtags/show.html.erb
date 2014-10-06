@@ -1,7 +1,7 @@
 <%= render 'shared/header', header: "Statuses for ##{params[:id]}" %>
 
-<ul>
-  <% @statuses.each do |status| %>
-    <li><%= render 'statuses/status', status: status %></li>
-  <% end %>
-</ul>
+<% @statuses.each do |status| %>
+  <div class="panel panel-default col-sm-7">
+    <div class="panel-body"><%= render 'statuses/status', status: status %></div>
+  </div>
+<% end %>
