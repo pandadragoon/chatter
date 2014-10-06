@@ -7,7 +7,12 @@ Chatter::Application.routes.draw do
   get '/timeline', to: 'users#timeline'
   get '/mentions', to: 'users#mentions'
 
-  resources :statuses, only: [:new, :create]
+  resources :hashtags, only: [:show]
+  resources :statuses, only: [:new, :create, :index, :show] do
+    member do
+      post 'share'
+    end
+  end
   resources :users, only: [:new, :create] do
     member do
       post 'follow'

@@ -1,6 +1,19 @@
 class StatusesController < ApplicationController
 
-  before_action :require_user, only: [:new, :create]
+  before_action :require_user, only: [:new, :create, :share]
+
+  def index
+    @statuses = Status.all
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
+  end
+
+  def show
+    @status = Status.find(params[:id])
+  end
 
   def new
     @status = Status.new
@@ -17,6 +30,18 @@ class StatusesController < ApplicationController
       flash[:error] = "Status not created."
       render :new
     end
+  end
+
+  def share
+    status = Status.find(params[:id])
+    new_status = Status.create(body: status.body, creator: current_user, parent_status: status)
+
+    if new_status.save
+      flash[:notice] = "Status shared."
+    else
+      flash[:error] = "Couldn't share the status."
+    end
+    redirect_to :back
   end
 
   private

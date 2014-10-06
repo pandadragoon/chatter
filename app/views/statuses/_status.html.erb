@@ -1,0 +1,13 @@
+<%= auto_links(status.body) %> 
+<% if !status.share_id || status.creator.username == status.parent_status.creator.username %>
+  created by 
+<% else %>
+  <%= link_to "status", status_path(status.parent_status) %>
+  by (<%= link_to "@#{status.parent_status.creator.username}", user_path(status.parent_status.creator.username) %>)
+  shared by
+<% end %>
+<%= link_to status.creator.username, user_path(status.creator.username) %> 
+<em><%= time_since_creation(status.created_at) %></em>
+<% if logged_in? && status.creator != current_user%>
+  [<%= link_to 'share status', share_status_path(status), method: 'post' %>]
+<% end %>

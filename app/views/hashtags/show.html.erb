@@ -1,4 +1,5 @@
-<%= render 'shared/header', header: 'Timeline' %>
+<%= render 'shared/header', header: "Statuses for ##{params[:id]}" %>
+
 <ul>
   <% @statuses.each do |status| %>
     <li><%= render 'statuses/status', status: status %></li>
